@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  jti: MyString
+  exp: 2024-02-04 23:20:56
+
+two:
+  jti: MyString
+  exp: 2024-02-04 23:20:56
