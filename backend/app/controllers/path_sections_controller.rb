@@ -1,5 +1,7 @@
 class PathSectionsController < ApplicationController
   before_action :set_path_section, only: %i[ show update destroy ]
+  before_action :authenticate_user!, only: %i[ create update destroy ]
+  before_action :isOwnPath, only: %i[ update destroy ]
 
   # GET /path_sections
   def index
@@ -15,6 +17,12 @@ class PathSectionsController < ApplicationController
 
   # POST /path_sections
   def create
+    # if the path section is being created by the owner of the path
+    path = Path.find(path_section_params[:path_id])
+    if path.user_id != current_user.id
+      render json: {error: "You do not have permission to modify this path"}, status: :unauthorized
+      return
+    end
     @path_section = PathSection.new(path_section_params)
 
     if @path_section.save
@@ -47,5 +55,13 @@ class PathSectionsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def path_section_params
       params.require(:path_section).permit(:name, :path_id)
+    end
+    def isOwnPath
+      if @path_section.path.user_id == current_user.id
+        return true
+      else
+        render json: {error: "You do not have permission to modify this path"}, status: :unauthorized
+          return;
+      end
     end
 end

@@ -1,5 +1,7 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[ show update destroy ]
+  before_action :authenticate_user!, only: %i[ create update destroy ]
+  before_action :isSelf, only: %i[ update destroy ]
 
   # GET /courses
   def index
@@ -15,7 +17,7 @@ class CoursesController < ApplicationController
 
   # POST /courses
   def create
-    @course = Course.new(course_params)
+    @course = Course.new(course_params_create)
 
     if @course.save
       render json: @course, status: :created, location: @course
@@ -35,7 +37,7 @@ class CoursesController < ApplicationController
 
   # DELETE /courses/1
   def destroy
-    @course.destroy
+    render json: @course.destroy
   end
 
   private
@@ -47,5 +49,17 @@ class CoursesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def course_params
       params.require(:course).permit(:name, :description, :user_id)
+    end
+
+    def course_params_create
+      params.require(:course).permit(:name,:description).merge(user_id: current_user.id)
+    end
+
+    def isSelf
+      if @course.user_id == current_user.id
+        return true
+      else
+        render:json => {error: "You are not authorized to perform this action"}, status: :unauthorized
+      end
     end
 end
