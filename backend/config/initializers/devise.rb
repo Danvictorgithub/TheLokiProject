@@ -313,6 +313,7 @@ Devise.setup do |config|
 
   config.jwt do |jwt|
     jwt.secret = Rails.application.credentials.devise_jwt_secret_key!
+    jwt.expiration_time = 7.day.to_i
   end
   config.navigational_formats = []
 end

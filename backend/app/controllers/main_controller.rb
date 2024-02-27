@@ -1,6 +1,5 @@
 class MainController < ApplicationController
-  before_action :authenticate_user!
   def hello
-    render json: { message: 'Hello World',user:current_user }
+    render json: { message: 'Welcome to the API The Loki Project API v1.0.0!' }
   end
 end

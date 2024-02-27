@@ -48,7 +48,7 @@ class PathsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def path_params_create
-      params.require(:path).permit(:name).merge(user_id: current_user.id)
+      params.require(:path).permit(:name,:description).merge(user_id: current_user.id)
     end
     def path_params
       params.require(:path).permit(:name, :user_id)
