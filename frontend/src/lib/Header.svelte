@@ -38,12 +38,31 @@
               </button>
             </div>
             <div class="flex flex-col gap-4 p-4">
-              <a href="/courses" class="text-xl font-medium"> All Courses </a>
-              <a href="/about" class="text-xl font-medium"> About </a>
-              <a href="/donate" class="text-xl font-medium"> Donate </a>
-              <a href="/login">
+              <a
+                href="/courses"
+                class="text-xl font-medium flex items-center gap-4"
+              >
+                <span class="material-symbols-outlined flex items-center gap-4">
+                  map
+                </span>All Courses
+              </a>
+              <a
+                href="/about"
+                class="text-xl font-medium flex items-center gap-4"
+              >
+                <span class="material-symbols-outlined"> info </span>About
+              </a>
+              <a
+                href="/donate"
+                class="text-xl font-medium flex items-center gap-4"
+              >
+                <span class="material-symbols-outlined">
+                  card_membership
+                </span>Donate
+              </a>
+              <a href="/login ">
                 <p
-                  class="px-4 py-2 border-2 rounded-md border-red-600 text-white bg-red-600 shrink-0"
+                  class="px-4 py-2 border-2 rounded-md font-bold border-red-600 text-white bg-red-600 shrink-0 flex justify-center items-center"
                 >
                   sign in
                 </p>
@@ -53,7 +72,9 @@
         </nav>
       {/if}
       <nav class="hidden md:flex gap-12 text-xl font-medium items-center">
-        <p>All Courses</p>
+        <a href="/courses">
+          <p>All Courses</p>
+        </a>
         <p>About</p>
         <p>Donate</p>
         <a href="/login">
