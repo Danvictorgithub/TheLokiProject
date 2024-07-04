@@ -1,5 +1,8 @@
 class SupabaseClient
   def initialize(supabase_key, supabase_url)
+    if (supabase_key.nil? || supabase_url.nil?)
+      raise "Supabase key or url is missing"
+    end
     @supabase_key = supabase_key
     @supabase_url = supabase_url
   end
